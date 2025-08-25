@@ -1,0 +1,2 @@
+# Marine POS Cluster Config
+
