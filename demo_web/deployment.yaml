@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-web
+  namespace: dedepos-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-web
+  template:
+    metadata:
+      labels:
+        app: busybox-web
+    spec:
+      containers:
+        - name: web
+          image: busybox:stable
+          ports:
+            - containerPort: 8080          
+          command: ["/bin/sh","-c"]
+          args:
+            - >
+              mkdir -p /www &&
+              echo '<!doctype html><html><head><meta charset="utf-8"><title>Hello Marine Web</title></head><body><h1>Hello Marine Web</h1></body></html>' > /www/index.html &&
+              httpd -f -p 8080 -h /www
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
