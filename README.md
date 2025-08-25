@@ -26,4 +26,8 @@ test redis
 
 ```
    echo -e "*1\r\n$4\r\nPING\r\n" | nc <redis_host> <redis_port>
+
+
+   echo -e "*2\r\n$4\r\nAUTH\r\n$32vaJrat-1hazdi-surfod\r\n*1\r\n$4\r\nPING\r\n" | nc <redis_host> <redis_port>
+
 ```
