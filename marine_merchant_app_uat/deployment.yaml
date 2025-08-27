@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marine-merchant-app-uat
+  namespace: dedepos-uat
+  labels:
+    app: marine-merchant-app-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marine-merchant-app-uat
+  template:
+    metadata:
+      labels:
+        app: marine-merchant-app-uat
+    spec:
+      containers:
+      - name: marine-merchant-app-uat
+        image: ghcr.io/suteetoe/dohomemerchant:sha-724236e
+        resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: web-port
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: "/health/liveness"
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: "/health/liveness"
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
