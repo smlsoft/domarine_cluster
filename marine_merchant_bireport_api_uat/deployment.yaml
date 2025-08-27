@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marine-merchant-bireport-api-uat
+  namespace: dedepos-dev
+  labels:
+    app: marine-merchant-bireport-api-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marine-merchant-bireport-api-uat
+  template:
+    metadata:
+      labels:
+        app: marine-merchant-bireport-api-uat
+    spec:
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      containers:
+      - name: marine-merchant-bireport-api-uat
+        image: ghcr.io/smlsoft/dedebireportapi:sha-3e0a2ce
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: web-port
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /dedebiapi/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /dedebiapi/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "300m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+        envFrom:
+        - secretRef:
+            name: marine-merchant-bireport-api-uat-env-secret

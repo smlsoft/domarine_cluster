@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: marine-merchant-bireport-api-uat
+  namespace: dedepos-uat
+spec:
+  type: NodePort
+  ports:
+    - name: marine-merchant-bireport-api-uat-port
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30829
+  selector:
+    app: marine-merchant-bireport-api-uat
