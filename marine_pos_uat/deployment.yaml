@@ -1,28 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: marine-pos-api-uat
+  name: marine-pos-app-uat
   namespace: dedepos-uat
   labels:
-    app: marine-pos-api-uat
+    app: marine-pos-app-uat
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: marine-pos-api-uat
+      app: marine-pos-app-uat
   template:
     metadata:
       labels:
-        app: marine-pos-api-uat
+        app: marine-pos-app-uat
     spec:
       # imagePullSecrets:
       #   - name: dockerconfigjson-github-com
       containers:
-      - name: marine-pos-api-uat
+      - name: marine-pos-app-uat
         image: ghcr.io/suteetoe/marine-pos-api:sha-963602d
-        envFrom:
-        - secretRef:
-            name: marine-pos-api-uat-secret
         resources:
             requests:
               memory: "512Mi"
