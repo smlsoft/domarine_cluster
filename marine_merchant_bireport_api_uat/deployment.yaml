@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: marine-merchant-bireport-api-uat
-  namespace: dedepos-dev
+  namespace: dedepos-uat
   labels:
     app: marine-merchant-bireport-api-uat
 spec:
@@ -19,7 +19,7 @@ spec:
         - name: dockerconfigjson-github-com
       containers:
       - name: marine-merchant-bireport-api-uat
-        image: ghcr.io/smlsoft/dedebireportapi:sha-3e0a2ce
+        image: ghcr.io/suteetoe/dedebireportapi:sha-3e0a2ce
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

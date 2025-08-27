@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: marine-merchant-report-api-uat
-        image: ghcr.io/suteetoe/dohomemerchant:sha-724236e
+        image: ghcr.io/suteetoe/dedemerchantapireport:sha-17c7566
         resources:
             requests:
               memory: "512Mi"
