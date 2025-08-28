@@ -30,13 +30,13 @@ spec:
             path: /dedebiapi/health
             port: 8080
             scheme: HTTP
-          initialDelaySeconds: 30
+          initialDelaySeconds: 90
         readinessProbe:
           httpGet:
             path: /dedebiapi/health
             port: 8080
             scheme: HTTP
-          initialDelaySeconds: 30
+          initialDelaySeconds: 90
         resources:
           requests:
             memory: "256Mi"

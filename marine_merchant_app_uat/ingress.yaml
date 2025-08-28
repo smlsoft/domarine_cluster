@@ -16,3 +16,14 @@ spec:
               number: 80
         path: /
         pathType: Prefix
+        property:
+          ingress.beta.kubernetes.io/url-match-mode: STARTS_WITH
+  tls:
+  - hosts:
+    - marinepro-uat.dohome.co.th
+    secretName: star-dohome-co-th-tls-secret
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.210.103.194
+    - ip: 159.138.238.187

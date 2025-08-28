@@ -16,5 +16,14 @@ spec:
             name: marine-merchant-report-api-uat
             port:
               number: 8080
-        path: /apireport(/|$)(.*)
+        path: /apireport/
         pathType: Prefix
+  tls:
+  - hosts:
+    - marinepro-api-uat.dohome.co.th
+    secretName: star-dohome-co-th-tls-secret
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.210.103.194
+    - ip: 159.138.238.187

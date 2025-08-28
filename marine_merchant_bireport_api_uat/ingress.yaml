@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: marine-merchant-bireport-api-uat
   namespace: dedepos-uat
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /dedebiapi/$2
 spec:
   ingressClassName: nginx
   rules:
@@ -16,5 +14,16 @@ spec:
             name: marine-merchant-bireport-api-uat
             port:
               number: 8080
-        path: /dedebiapi(/|$)(.*)
+        path: /dedebiapi/
         pathType: Prefix
+        property:
+          ingress.beta.kubernetes.io/url-match-mode: STARTS_WITH
+  tls:
+  - hosts:
+    - marinepro-api-uat.dohome.co.th
+    secretName: star-dohome-co-th-tls-secret
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.210.103.194
+    - ip: 159.138.238.187
